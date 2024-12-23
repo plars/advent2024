@@ -82,3 +82,20 @@ fn main() {
     let data = std::fs::read_to_string("input.txt").unwrap();
     println!("{}", part_a(&data));
 }
+
+#[cfg(test)]
+#[test]
+fn test_part_a() {
+    let data = "MMMSXXMASM
+MSAMXMSMSA
+AMXSXMAAMM
+MSAMASMSMX
+XMASAMXAMM
+XXAMMXXAMA
+SMSMSASXSS
+SAXAMASAAA
+MAMMMXMMMM
+MXMXAXMASX"
+        .to_string();
+    assert_eq!(part_a(&data), 18);
+}

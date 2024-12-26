@@ -1,5 +1,3 @@
-use std;
-
 fn part_a(data: &String) -> i32 {
     let mut count = 0;
     let wordsearch = make_wordsearch(&data);
@@ -16,7 +14,7 @@ fn part_a(data: &String) -> i32 {
     count
 }
 
-fn make_wordsearch(data: &String) -> Vec<Vec<char>> {
+fn make_wordsearch(data: &str) -> Vec<Vec<char>> {
     let mut wordsearch: Vec<Vec<char>> = Vec::new();
     for line in data.lines() {
         wordsearch.push(line.chars().collect());
@@ -24,12 +22,7 @@ fn make_wordsearch(data: &String) -> Vec<Vec<char>> {
     wordsearch
 }
 
-fn check_pattern_from_location(
-    wordsearch: &Vec<Vec<char>>,
-    pattern: &str,
-    x: usize,
-    y: usize,
-) -> i32 {
+fn check_pattern_from_location(wordsearch: &[Vec<char>], pattern: &str, x: usize, y: usize) -> i32 {
     // starting from the specified x,y location, check how many times the remaining characters are found in any direction
     let mut count: i32 = 0;
     let max_y = wordsearch.len() - 1;
@@ -39,7 +32,7 @@ fn check_pattern_from_location(
     if x + pattern.len() <= max_x {
         if wordsearch[y][x + 1..x + pattern.len() + 1]
             .iter()
-            .map(|&c| c)
+            .cloned()
             .eq(pattern.chars())
         {
             count += 1;
